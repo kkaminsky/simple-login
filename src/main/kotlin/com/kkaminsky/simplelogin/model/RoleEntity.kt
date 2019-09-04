@@ -13,5 +13,5 @@ class RoleEntity {
     var id: Long = 0
 
     @Column(name = "role")
-    lateinit var role: String
+    var role: String? = null
 }

@@ -12,13 +12,13 @@ class UserEntity {
     var id: Long = 0
 
     @Column(name = "username")
-    lateinit var username: String
+    var username: String? = null
 
     @Column(name = "password")
-    lateinit var password: String
+    var password: String? = null
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id",nullable = false)
-    lateinit var role: RoleEntity
+    var role: RoleEntity? = null
 
 }
