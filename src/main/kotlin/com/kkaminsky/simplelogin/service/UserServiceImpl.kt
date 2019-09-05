@@ -26,11 +26,16 @@ class UserServiceImpl @Autowired constructor(
     }
 
     override fun delete(username: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        val user = userRepository.findByUsername(username)?:throw Exception("Пользователь $username не существует!")
+        userRepository.delete(user)
+
     }
 
     override fun edit(oldUsername: String, newUsername: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val user = userRepository.findByUsername(oldUsername)?:throw Exception("Пользователь $oldUsername не существует!")
+        user.username = newUsername
+        userRepository.save(user)
     }
 
     override fun register(username: String, password: String) {

@@ -3,7 +3,7 @@ package com.kkaminsky.simplelogin.model
 import javax.persistence.*
 
 @Entity
-@Table(name="user")
+@Table(name="user",schema = "public")
 class UserEntity {
 
     @Id
@@ -17,7 +17,7 @@ class UserEntity {
     @Column(name = "password")
     var password: String? = null
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "role_id",nullable = false)
     var role: RoleEntity? = null
 
