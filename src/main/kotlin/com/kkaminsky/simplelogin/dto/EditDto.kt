@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class EditDto(
 
-        @JsonProperty("user")
-        val user: UserDto,
+        @JsonProperty("userCheck")
+        val userCheck: UserCheckDto,
 
         @JsonProperty("oldUsername")
         val oldUsername: String,
 
         @JsonProperty("newUsername")
-        val newUsername: String
+        val newUsername: String,
+
+        @JsonProperty("newRole")
+        val newRole: String
 )

@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class DeleteDto(
 
-        @JsonProperty("user")
-        val user: UserDto,
+        @JsonProperty("userCheck")
+        val userCheck: UserCheckDto,
 
         @JsonProperty("username")
         val username: String

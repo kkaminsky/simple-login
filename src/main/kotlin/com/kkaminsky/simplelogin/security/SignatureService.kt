@@ -26,18 +26,28 @@ class SignatureService {
         signatureVerify.initVerify(keyPair.public)
     }
 
-    fun getSign(text: String): String {
+    fun getSign(text: String): ByteArray {
 
         signatureSign.update(Base64.getEncoder().encode(text.toByteArray()))
 
-        return String(signatureSign.sign())
+        val str =signatureSign.sign()
+        println("login text $text")
+        println("login sign $str")
+        println("________________")
+        return str
 
     }
 
-    fun verify(text: String, sign: String): Boolean {
+    fun verify(text: String, sign: ByteArray): Boolean {
 
         signatureVerify.update(Base64.getEncoder().encode(text.toByteArray()))
+        //println(Base64.getEncoder().encode(text.toByteArray()))
+        println("check text $text")
+        println("check sign $sign")
 
-        return signatureVerify.verify(sign.toByteArray())
+        println("________++++________")
+        val result = signatureVerify.verify(sign)
+        println("result $result")
+        return result
     }
 }

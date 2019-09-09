@@ -1,6 +1,6 @@
 package com.kkaminsky.simplelogin.mapper
 
-import com.kkaminsky.simplelogin.dto.UserDto
+import com.kkaminsky.simplelogin.dto.UserCheckDto
 import com.kkaminsky.simplelogin.model.UserEntity
 import org.mapstruct.Mapper
 import org.mapstruct.ObjectFactory
@@ -8,5 +8,5 @@ import org.mapstruct.ObjectFactory
 @Mapper(componentModel = "spring",uses= [ObjectFactory::class])
 interface EntityToDtoMapper {
 
-    fun map(userEntity: UserEntity): UserDto
+    fun map(userEntity: UserEntity): UserCheckDto
 }
