@@ -29,25 +29,24 @@ class UserController @Autowired constructor(
                 userService.registerAdmin(dto.username, dto.password)
         }
 
-
         @PostMapping("/edit")
-        @PreAuthorize("@securityService.hasPermission(#dto.userCheck)")
         fun edit(@RequestBody dto: EditDto){
-
+                if(!securityService.hasPermission(dto.userCheck))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
                 userService.edit(dto.oldUsername, dto.newUsername, dto.newRole)
         }
 
         @PostMapping("/delete")
-        @PreAuthorize("@securityService.hasPermission(#dto.userCheck)")
         fun delete(@RequestBody dto: DeleteDto){
+                if(!securityService.hasPermission(dto.userCheck))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
                 return userService.delete(dto.username)
         }
 
         @PostMapping("/all")
-        @PreAuthorize("@securityService.hasPermission(#dto.userCheck)")
-        fun getAllUsers(@RequestBody dto: GetAllUsersDto): List<UserDto>{
-                if(!securityService.hasPermission(dto.userCheck)) throw Exception("У вас нет доступа к запршиваему ресурсу!")
+        fun getAllUsers(@RequestBody dto: GetAllUsersDto): List<UserDto> {
+                if(!securityService.hasPermission(dto.userCheck))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
                 return userService.getAllUsers()
         }
-
 }
