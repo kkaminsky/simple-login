@@ -21,4 +21,7 @@ class UserEntity {
     @JoinColumn(name = "role_id",nullable = false)
     var role: RoleEntity? = null
 
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.REMOVE])
+    var grants: MutableList<GrantEntity> = mutableListOf()
+
 }

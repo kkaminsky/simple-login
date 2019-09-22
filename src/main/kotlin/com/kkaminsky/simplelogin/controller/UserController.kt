@@ -49,4 +49,48 @@ class UserController @Autowired constructor(
                         throw Exception("У вас нет доступа к запршиваему ресурсу!")
                 return userService.getAllUsers()
         }
+
+        @PostMapping("/file/create")
+        fun createFile(@RequestBody dto: CreateFileDto){
+                if(!securityService.hasPermission(dto.userCheck))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
+                userService.createUserFile(dto.userCheck.username,dto.fileName)
+        }
+
+        @PostMapping("/file/delete")
+        fun deleteFile(@RequestBody dto: CreateFileDto){
+                if(!securityService.hasPermission(dto.userCheck))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
+                userService.deleteFile(dto.userCheck.username,dto.fileName)
+        }
+
+        @PostMapping("/file/all")
+        fun getAllFilesForUser(@RequestBody userCheckDto: UserCheckDto): List<FileDto>{
+                if(!securityService.hasPermission(userCheckDto))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
+                return userService.getFilesForUser(userCheckDto.username)
+        }
+
+        @PostMapping("/file/read")
+        fun readFile(@RequestBody dto: CreateFileDto): String{
+                if(!securityService.hasPermission(dto.userCheck))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
+                return userService.readFile(dto.userCheck.username,dto.fileName)
+        }
+
+        @PostMapping("/file/write")
+        fun writeFile(@RequestBody dto: WriteFileDto){
+                if(!securityService.hasPermission(dto.userCheck))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
+                return userService.writeFile(dto.userCheck.username,dto.fileName,dto.text)
+        }
+
+
+        @PostMapping("/file/takegrant")
+        fun takeGrant(@RequestBody dto: TakeGrantDto){
+                if(!securityService.hasPermission(dto.userCheck))
+                        throw Exception("У вас нет доступа к запршиваему ресурсу!")
+
+                return userService.takeGrant(dto.userCheck.username,dto.fileName,dto.grantName,dto.usernameNew)
+        }
 }
